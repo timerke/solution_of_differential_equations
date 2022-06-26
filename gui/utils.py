@@ -4,6 +4,7 @@ File with useful functions.
 
 from datetime import datetime
 from typing import List
+import pandas as pd
 
 
 def create_file_name(extension: str):
@@ -24,7 +25,8 @@ def save_data_to_excel(file_name: str, xs: List[float], ys: List[float]):
     :param ys:
     """
 
-    pass
+    data = pd.DataFrame({"x": xs, "y": ys})
+    data.to_excel(file_name, engine="xlsxwriter")
 
 
 def save_data_to_txt(file_name: str, xs: List[float], ys: List[float]):

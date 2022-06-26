@@ -263,6 +263,7 @@ class MainWindow(qt.QMainWindow):
         """
 
         if not self._xs:
+            qt.QMessageBox.information(self, "Информация", "Нет графика")
             return
         file_name = os.path.join(self._dir_name_for_save, ut.create_file_name(".png"))
         file_name = qt.QFileDialog.getSaveFileName(self, "Сохранить график в файл", directory=file_name,
@@ -278,17 +279,18 @@ class MainWindow(qt.QMainWindow):
         """
 
         if not self._xs:
+            qt.QMessageBox.information(self, "Информация", "Нет решения")
             return
         file_name = os.path.join(self._dir_name_for_save, ut.create_file_name(".txt"))
         file_name = qt.QFileDialog.getSaveFileName(self, "Сохранить решение в файл", directory=file_name,
-                                                   filter="Text files (*.txt)")[0]
+                                                   filter="Text files (*.xlsx *.txt)")[0]
         if file_name:
             self._dir_name_for_save = os.path.dirname(file_name)
             extension = os.path.splitext(file_name)[-1]
-            if extension == ".txt":
-                ut.save_data_to_txt(file_name, self._xs, self._ys)
-            else:
+            if extension == ".xlsx":
                 ut.save_data_to_excel(file_name, self._xs, self._ys)
+            else:
+                ut.save_data_to_txt(file_name, self._xs, self._ys)
 
     @pyqtSlot()
     def set_equation_order(self):
