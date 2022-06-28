@@ -1,3 +1,7 @@
+"""
+File to start application.
+"""
+
 import sys
 from PyQt5.QtWidgets import QApplication
 from gui import MainWindow
