@@ -23,8 +23,8 @@ class Solver(QObject):
     Class to solve differential equation.
     """
 
-    MAX_NUMBER_OF_POINTS: int = 100
-    MAX_NUMBER_OF_ITERATIONS: int = 20
+    MAX_NUMBER_OF_POINTS: int = 500
+    MAX_NUMBER_OF_ITERATIONS: int = 10
     calculation_finished: pyqtSignal = pyqtSignal()
     calculation_for_step_finished: pyqtSignal = pyqtSignal(list, list, float)
     calculation_for_step_started: pyqtSignal = pyqtSignal(int, float)
@@ -87,7 +87,8 @@ class Solver(QObject):
             if current_accuracy != -1 and current_accuracy <= self.accuracy:
                 self.calculation_finished.emit()
                 break
-            if iteration_number > self.MAX_NUMBER_OF_POINTS:
-                self.max_iterations_used.emit(self.MAX_NUMBER_OF_POINTS)
+            if iteration_number >= self.MAX_NUMBER_OF_ITERATIONS:
+                self.max_iterations_used.emit(iteration_number)
+                self.calculation_finished.emit()
                 break
             time.sleep(0.2)

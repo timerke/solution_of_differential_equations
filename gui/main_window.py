@@ -436,7 +436,7 @@ class MainWindow(qt.QMainWindow):
         """
 
         self._enable_widgets(True)
-        self.text_edit.append(f"Maximum number of iterations used ({iteration_number}). Calculation finished\n")
+        self.text_edit.append(f"Maximum number of iterations used ({iteration_number})")
 
     @pyqtSlot()
     def save_figure(self):
